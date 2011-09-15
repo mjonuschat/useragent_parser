@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "useragent_parser"
   s.version     = UseragentParser::VERSION
   s.authors     = ["Morton Jonuschat"]
-  s.email       = ["m.jonuschat@gute-botschafter.de"]
+  s.email       = ["yabawock@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_development_dependency "rake",        "~> 0.9.0"
+  s.add_development_dependency "rspec",       "~> 2.6.0"
+  s.add_development_dependency "multi_json",  "~> 1.0.1"
 end
