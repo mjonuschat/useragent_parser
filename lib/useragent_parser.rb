@@ -54,8 +54,9 @@ module UseragentParser
 
     # Override for Chrome Frame IFF Chrome is enabled.
     if js_user_agent_string && js_user_agent_string.include?('Chrome/') && user_agent_string.include?('chromeframe')
-      family = 'Chrome Frame (%{family} %{v1})' % { :family => family, :v1 => v1 }
-      cf_family, v1, v2, v3 = UseragentParser.parse(js_user_agent_string).values
+      family = 'Chrome Frame (%s %s)' % [ family, v1 ]
+      js_ua = UseragentParser.parse(js_user_agent_string)
+      cf_family, v1, v2, v3 = js_ua['family'], js_ua['v1'], js_ua['v2'], js_ua['v3']
     end
 
     OS_PARSERS.each do |parser|
