@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = UseragentParser::VERSION
   s.authors     = ["Morton Jonuschat"]
   s.email       = ["yabawock@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/yabawock/useragent_parser"
+  s.summary     = %q{A library to extract informtion from Useragent headers}
+  s.description = %q{UseragentParser extracts browser and operating system information from the headers sent by most browsers and email clients}
 
   s.rubyforge_project = "useragent_parser"
 
