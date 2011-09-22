@@ -3,6 +3,7 @@ require "useragent_parser/parser"
 
 module UseragentParser
   USER_AGENT_PARSERS = []
+  OS_PARSERS = []
 
   def UseragentParser.load_parsers!
     YAML.load_file(File.expand_path(File.dirname(__FILE__)) + "/../config/user_agent_parser.yaml")['user_agent_parsers'].each do |parser|
@@ -18,10 +19,26 @@ module UseragentParser
 
       USER_AGENT_PARSERS.push UseragentParser::Parser.new(regex, family_replacement, v1_replacement)
     end
+
+    YAML.load_file(File.expand_path(File.dirname(__FILE__)) + "/../config/user_agent_parser.yaml")['os_parsers'].each do |parser|
+      regex = parser['regex']
+      family_replacement, v1_replacement, code_name = nil, nil, nil
+      if parser.has_key?('family_replacement')
+        family_replacement = parser['family_replacement']
+      end
+
+      if parser.has_key?('v1_replacement')
+        v1_replacement = parser['v1_replacement']
+      end
+
+      OS_PARSERS.push UseragentParser::Parser.new(regex, family_replacement, v1_replacement)
+    end
   end
 
   def UseragentParser.parse(user_agent_string, js_user_agent_string = nil, js_user_agent_family = nil, js_user_agent_v1 = nil, js_user_agent_v2 = nil, js_user_agent_v3 = nil)
     family, v1, v2, v3 = nil, nil, nil, nil
+    os_family, os_v1, os_v2, os_v3 = nil, nil, nil, nil
+
     # Override via JS properties.
     if js_user_agent_family.nil?
       USER_AGENT_PARSERS.each do |parser|
@@ -41,7 +58,21 @@ module UseragentParser
       cf_family, v1, v2, v3 = UseragentParser.parse(js_user_agent_string).values
     end
 
-    { 'family' => family || 'Other', 'v1' => v1, 'v2' => v2, 'v3' => v3 }
+    OS_PARSERS.each do |parser|
+      os_family, os_v1, os_v2, os_v3 = parser.parse(user_agent_string)
+      break unless os_family.nil?
+    end
+
+    {
+      'family' => family || 'Other',
+      'v1' => v1,
+      'v2' => v2,
+      'v3' => v3,
+      'os_family' => os_family || 'Other',
+      'os_v1' => os_v1,
+      'os_v2' => os_v2,
+      'os_v3' => os_v3
+    }
   end
 end
 

@@ -11,10 +11,14 @@ describe UseragentParser do
         js_ua = eval(testcase['js_ua'].gsub("': '", "' => '")).values
       end
       result = UseragentParser.parse(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['v1'].should     == testcase['v1']
-      result['v2'].should     == testcase['v2']
-      result['v3'].should     == testcase['v3']
+      result['family'].should     == testcase['family']
+      result['v1'].should         == testcase['v1']
+      result['v2'].should         == testcase['v2']
+      result['v3'].should         == testcase['v3']
+      result['os_family'].should  == testcase['os_family']
+      result['os_v1'].should      == testcase['os_v1']
+      result['os_v2'].should      == testcase['os_v2']
+      result['os_v3'].should      == testcase['os_v3']
     end
   end
 

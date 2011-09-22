@@ -111,12 +111,20 @@ user_agent_parsers:
   # Maxthon Googlebot
   - regex: 'Googlebot\/\d+\.\d+.+(Maxthon)'
 
+  # Mobile Safari on Android
+  - regex: 'Android.*\).*(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Safari/'
+    family_replacement: 'Mobile Safari'
+
+  # Mobile Safari on iOS
+  - regex: '(Version)/(\d+)\.(\d+)(?:\.(\d+))?.*Mobile/\w+ Safari/\d+'
+    family_replacement: 'Mobile Safari'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
 
   # Browser/major_version.minor_version.beta_version
-  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Vodafone|NetFront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iron|Iris)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Vodafone|NetFront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Thunderbird|Iron|Iris)/(\d+)\.(\d+)\.(\d+)'
 
   # Browser/major_version.minor_version
   - regex: '(Bolt|Jasmine|IEMobile|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Iron|Space Bison|Stainless|Orca|Dolfin|BOLT)/(\d+)\.(\d+)'
@@ -215,15 +223,36 @@ user_agent_parsers:
 
 
 os_parsers:
-  - regex: '(Android)'
+  - regex: '(Windows NT|Windows) (\d+)\.(\d+)'
+    family_replacement: 'Windows'
+  - regex: '(Windows Phone OS) (\d+)\.(\d+)'
+    family_replacement: 'Windows Phone'
+  - regex: '(Windows|Win) (XP|9x|95|98|ME)'
+    family_replacement: 'Windows'
+  - regex: '(Windows CE)'
+  - regex: '(Win)(95|98|9x)'
+    family_replacement: 'Windows'
   - regex: '(Windows)'
-  - regex: '(iPad)'
-  - regex: '(iPhone OS) ([\d_]+)'
-    os_replacement: 'iOS'
-  - regex: '(Mac OS X)'
+
+  - regex: '(Android) (\d+)\.(\d+)\.(\d+)'
+  - regex: '(Android) (\d+)\.(\d+)'
+
+  - regex: '(CPU OS|CPU iPhone OS) (\d+)_(\d+)_(\d+) like Mac OS X'
+    family_replacement: 'iOS'
+  - regex: '(CPU OS|CPU iPhone OS) (\d+)_(\d+) like Mac OS X'
+    family_replacement: 'iOS'
+
+  - regex: '(Mac OS X) v?(\d+)\.(\d+)\.?(\d+)?'
+  - regex: '(Mac OS X) v?(\d+)_(\d+)_?(\d+)?'
+  - regex: '(Mac OS X)/(\d+)\.(\d+)\.?(\d+)?'
+  - regex: '(os=Mac) (\d+)\.(\d+)\.(\d+)'
+    family_replacement: 'Mac OS X'
+  - regex: '(Mac OS X|Mac_PowerPC|iMac|MacBook|Macintosh|PowerMac)'
+    family_replacement: 'Mac OS X'
+
   - regex: '(FreeBSD)'
-  - regex: '(iPod)'
   - regex: '(iPhone Simulator)'
+
   - regex: '(Linux)'
 
 product_parsers:
