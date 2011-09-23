@@ -1,5 +1,6 @@
 require "useragent_parser/version"
 require "useragent_parser/parser"
+require "useragent_parser/user_agent"
 
 module UseragentParser
   USER_AGENT_PARSERS = []
@@ -56,7 +57,7 @@ module UseragentParser
     if js_user_agent_string && js_user_agent_string.include?('Chrome/') && user_agent_string.include?('chromeframe')
       family = 'Chrome Frame (%s %s)' % [ family, v1 ]
       js_ua = UseragentParser.parse(js_user_agent_string)
-      cf_family, v1, v2, v3 = js_ua['family'], js_ua['v1'], js_ua['v2'], js_ua['v3']
+      cf_family, v1, v2, v3 = js_ua.browser_family, js_ua.browser_major_version, js_ua.browser_minor_version, js_ua.browser_patch_version
     end
 
     OS_PARSERS.each do |parser|
@@ -64,16 +65,7 @@ module UseragentParser
       break unless os_family.nil?
     end
 
-    {
-      'family' => family || 'Other',
-      'v1' => v1,
-      'v2' => v2,
-      'v3' => v3,
-      'os_family' => os_family || 'Other',
-      'os_v1' => os_v1,
-      'os_v2' => os_v2,
-      'os_v3' => os_v3
-    }
+    UseragentParser::UserAgent.new({ 'family' => family, 'v1' => v1, 'v2' => v2, 'v3' => v3, 'os_family' => os_family, 'os_v1' => os_v1, 'os_v2' => os_v2, 'os_v3' => os_v3 })
   end
 end
 
