@@ -10,14 +10,14 @@ describe UseragentParser do
         js_ua = [ js_ua['js_user_agent_string'], js_ua['js_user_agent_family'], js_ua['js_user_agent_v1'], js_ua['js_user_agent_v2'], js_ua['js_user_agent_v3'] ]
       end
       result = UseragentParser.parse(testcase['user_agent_string'], *js_ua)
-      result['family'].should     == testcase['family']
-      result['v1'].should         == testcase['v1']
-      result['v2'].should         == testcase['v2']
-      result['v3'].should         == testcase['v3']
-      result['os_family'].should  == testcase['os_family']
-      result['os_v1'].should      == testcase['os_v1']
-      result['os_v2'].should      == testcase['os_v2']
-      result['os_v3'].should      == testcase['os_v3']
+      result.browser_family.should        == testcase['family']
+      result.browser_major_version.should == testcase['v1']
+      result.browser_minor_version.should == testcase['v2']
+      result.browser_patch_version.should == testcase['v3']
+      result.os_family.should             == testcase['os_family']
+      result.os_major_version.should      == testcase['os_v1']
+      result.os_minor_version.should      == testcase['os_v2']
+      result.os_patch_version.should      == testcase['os_v3']
     end
   end
 
@@ -28,10 +28,10 @@ describe UseragentParser do
         js_ua = eval(testcase['js_ua'].gsub("': '", "' => '")).values
       end
       result = UseragentParser.parse(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['v1'].should     == testcase['v1']
-      result['v2'].should     == testcase['v2']
-      result['v3'].should     == testcase['v3']
+      result.browser_family.should        == testcase['family']
+      result.browser_major_version.should == testcase['v1']
+      result.browser_minor_version.should == testcase['v2']
+      result.browser_patch_version.should == testcase['v3']
     end
   end
 
@@ -42,10 +42,10 @@ describe UseragentParser do
         js_ua = eval(testcase['js_ua'].gsub("': '", "' => '")).values
       end
       result = UseragentParser.parse(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['v1'].should     == testcase['v1']
-      result['v2'].should     == testcase['v2']
-      result['v3'].should     == testcase['v3']
+      result.browser_family.should        == testcase['family']
+      result.browser_major_version.should == testcase['v1']
+      result.browser_minor_version.should == testcase['v2']
+      result.browser_patch_version.should == testcase['v3']
     end
   end
 end

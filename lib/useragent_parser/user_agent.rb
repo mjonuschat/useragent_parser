@@ -4,7 +4,7 @@ module UseragentParser
     attr_reader :os, :os_family, :os_version, :os_major_version, :os_minor_version, :os_patch_version
 
     def initialize(details = {})
-      @browser_family = details['browser_family'] || 'Other'
+      @browser_family = details['family'] || 'Other'
       @browser_major_version = details['v1']
       @browser_minor_version = details['v2']
       @browser_patch_version = details['v3']

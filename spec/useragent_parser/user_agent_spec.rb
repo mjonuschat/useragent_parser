@@ -5,35 +5,35 @@ require 'spec_helper'
 describe UseragentParser::UserAgent do
   describe "for browser details" do
     it "should report the browser family" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_family.should == 'Chrome'
+      UseragentParser::UserAgent.new({ 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_family.should == 'Chrome'
     end
 
     it "should report the browser major version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_major_version.should == '14'
+      UseragentParser::UserAgent.new({ 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_major_version.should == '14'
     end
 
     it "should report the browser minor version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_minor_version.should == '0'
+      UseragentParser::UserAgent.new({ 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_minor_version.should == '0'
     end
 
     it "should report the browser patch version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_patch_version.should == '835'
+      UseragentParser::UserAgent.new({ 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_patch_version.should == '835'
     end
 
     it "should report the browser version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_version.should == '14.0.835'
+      UseragentParser::UserAgent.new({ 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' }).browser_version.should == '14.0.835'
     end
 
     it "should report the browser version without patch level" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Firefox', 'v1' => '5', 'v2' => '0' }).browser_version.should == '5.0'
+      UseragentParser::UserAgent.new({ 'family' => 'Firefox', 'v1' => '5', 'v2' => '0' }).browser_version.should == '5.0'
     end
 
     it "should report the browser version without minor version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Firefox', 'v1' => '5' }).browser_version.should == '5'
+      UseragentParser::UserAgent.new({ 'family' => 'Firefox', 'v1' => '5' }).browser_version.should == '5'
     end
 
     it "should report the browser family without version" do
-      UseragentParser::UserAgent.new({ 'browser_family' => 'Opera' }).browser_version.should == ''
+      UseragentParser::UserAgent.new({ 'family' => 'Opera' }).browser_version.should == ''
     end
   end
 
