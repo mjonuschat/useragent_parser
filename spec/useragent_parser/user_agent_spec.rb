@@ -158,4 +158,12 @@ describe UseragentParser::UserAgent do
       UseragentParser::UserAgent.new({ 'os_family' => 'FreeBSD' }).os.should == 'FreeBSD'
     end
   end
+
+  it "should confuse operating system and browser version" do
+    ua = UseragentParser::UserAgent.new({ 'os_family' => 'Mac OS X', 'os_v1' => '10', 'os_v2' => '7', 'os_v3' => '2', 'family' => 'Chrome', 'v1' => '14', 'v2' => '0', 'v3' => '835' })
+    ua.browser_family.should == 'Chrome'
+    ua.browser_version.should == '14.0.835'
+    ua.os_family.should == 'Mac OS X'
+    ua.os_version.should == '10.7.2'
+  end
 end

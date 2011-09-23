@@ -20,7 +20,7 @@ module UseragentParser
     end
 
     def os_version
-      @browser_version ||= "#{os_major_version}.#{os_minor_version}.#{os_patch_version}".gsub(/\.+$/, '').strip
+      @os_version ||= "#{os_major_version}.#{os_minor_version}.#{os_patch_version}".gsub(/\.+$/, '').strip
     end
 
     def os
