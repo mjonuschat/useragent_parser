@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'spec_helper'
-require 'useragent_parser'
 
 describe UseragentParser do
   YAML.load_file(File.expand_path(File.dirname(__FILE__)) + "/../fixtures/test_user_agent_parser.yaml")['test_cases'].each do |testcase|

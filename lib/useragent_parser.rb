@@ -1,5 +1,6 @@
 require "useragent_parser/version"
 require "useragent_parser/parser"
+require "useragent_parser/user_agent"
 
 module UseragentParser
   USER_AGENT_PARSERS = []

@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'multi_json'
+require 'useragent_parser'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
