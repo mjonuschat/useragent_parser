@@ -1,4 +1,4 @@
-# UseragentParser
+# UseragentParser [![Build Status](https://secure.travis-ci.org/yabawock/useragent_parser.png)](http://travis-ci.org/yabawock/useragent_parser)
 
 UseragentParser is a library to detect useful information contained
 within the Useragent Header transmitted by modern web clients.
