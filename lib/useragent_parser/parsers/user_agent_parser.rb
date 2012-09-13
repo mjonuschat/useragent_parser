@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module UseragentParser
-  class Parser
+  class UserAgentParser
     attr_accessor :pattern, :user_agent_re, :family_replacement, :v1_replacement
 
     def initialize(pattern, family_replacement = nil, v1_replacement = nil)
@@ -38,12 +38,8 @@ module UseragentParser
           v1 = match[2]
         end
 
-        if match.size >= 4
-          v2 = match[3]
-          if match.size >= 5
-            v3 = match[4]
-          end
-        end
+        v2 = match[3] if match.size >= 4
+        v3 = match[4] if match.size >= 5
       end
       return family, v1, v2, v3
     end
