@@ -4,15 +4,37 @@ module UseragentParser
     attr_reader :os, :os_family, :os_version, :os_major_version, :os_minor_version, :os_patch_version
 
     def initialize(details = {})
-      @browser_family = details['family'] || 'Other'
-      @browser_major_version = details['v1']
-      @browser_minor_version = details['v2']
-      @browser_patch_version = details['v3']
+      if user_agent = details['user_agent']
+        @browser_family = user_agent['family'] || 'Other'
+        @browser_major_version = user_agent['major']
+        @browser_minor_version = user_agent['minor']
+        @browser_patch_version = user_agent['patch']
+      end
 
-      @os_family = details['os_family'] || 'Other'
-      @os_major_version = details['os_v1']
-      @os_minor_version = details['os_v2']
-      @os_patch_version = details['os_v3']
+      if os = details['os']
+        @os_family = os['family'] || 'Other'
+        @os_major_version = os['major']
+        @os_minor_version = os['minor']
+        @os_patch_version = os['patch']
+      end
+
+       if device = details['device']
+         @device = device['family']
+         @is_mobile = device['is_mobile']
+         @is_spider = device['is_spider']
+       end
+    end
+
+    def device
+      @device
+    end
+
+    def is_mobile?
+      !!@is_mobile
+    end
+
+    def is_spider?
+      !!@is_spider
     end
 
     def browser_version
