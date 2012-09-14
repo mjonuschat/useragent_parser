@@ -58,6 +58,112 @@ describe UseragentParser::UserAgent do
     end
   end
 
+  describe "for email client" do
+    it "should detect Mozilla Thunderbird" do
+      UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.4; de; rv:1.9.2.15) Gecko/20110303 Lightning/1.0b2 Thunderbird/3.1.9').email.should == 'Thunderbird'
+    end
+
+    it "should detect Windows Live Mail" do
+      UseragentParser.parse_with_referrer('Outlook-Express/7.0 (MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30618; TmstmpExt)').email.should == 'Windows Live Mail'
+    end
+
+    it "should detect Eudora" do
+      UseragentParser.parse_with_referrer('Eudora/6.2.3b9 (MacOS)').email.should == 'Eudora'
+    end
+
+    it "should detect T-Online eMail" do
+      UseragentParser.parse_with_referrer('Kopernikus T-Online eMail 3.x').email.should == 'T-Online eMail'
+    end
+
+    it "should detect old Apple Mail" do
+      UseragentParser.parse_with_referrer('Mail/1082 CFNetwork/454.11.5 Darwin/10.5.0 (i386) (MacBookPro6%2C2)').email.should == 'Apple Mail'
+    end
+
+    it "should detect newer Apple Mail" do
+      UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; de-de) AppleWebKit/533.18.1 (KHTML, like Gecko)').email.should == 'Apple Mail'
+    end
+
+    it "should detect Lotus Notes" do
+      UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; Lotus-Notes/6.0; Macintosh PPC)').email.should == 'Lotus Notes'
+    end
+
+    it "should detect Microsoft Outlook" do
+      UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 1.1.4322; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; ms-office; MSOffice 14)').email.should == 'Microsoft Outlook'
+    end
+
+    it "should detect Sparrow" do
+      UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8) AppleWebKit/536.25 (KHTML, like Gecko) Sparrow/1164').email.should == 'Sparrow'
+    end
+
+    describe "Outlook" do
+      it "should should recognize Outlook 2000/2003/Express" do
+        UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)').email_version.should == 'Outlook 2000/2003/Express'
+      end
+
+      it "should not mistake IE7 as Outlook" do
+        # TODO
+      end
+
+      it "should should recognize Outlook 2007" do
+        UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2; MSOffice 12)').email_version.should == 'Outlook 2007'
+      end
+
+      it "should should recognize Outlook 2010" do
+        UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; InfoPath.3; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; ms-office; MSOffice 14)').email_version.should == 'Outlook 2010'
+      end
+    end
+
+    describe "Apple Mail" do
+      it "should recognize Version 2" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_4_11; de-de) AppleWebKit/533.19.4 (KHTML, like Gecko)').email_version.should == 'Apple Mail 2'
+      end
+
+      it "should recognize Version 3" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_5_8; de-de) AppleWebKit/533.18.1 (KHTML, like Gecko)').email_version.should == 'Apple Mail 3'
+      end
+
+      it "should recognize Version 4" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; de-de) AppleWebKit/533.19.4 (KHTML, like Gecko)').email_version.should == 'Apple Mail 4'
+      end
+
+      it "should recognize Version 5" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.53.11 (KHTML, like Gecko)').email_version.should == 'Apple Mail 5'
+      end
+
+      it "should recognize Version 6" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_1) AppleWebKit/536.25 (KHTML, like Gecko)').email_version.should == 'Apple Mail 6'
+      end
+
+      it "should not mistake Safari for Apple Mail" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_1) AppleWebKit/536.25 (KHTML, like Gecko)', 'something').email_version.should be_nil
+      end
+    end
+
+    describe "Apple Mobile Mail" do
+      it "should recognize an iPad" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPad; U; CPU OS 3_2_2 like Mac OS X; de-de) AppleWebKit/531.21.10 (KHTML, like Gecko)').email_version.should == 'iPad'
+      end
+
+      it "should recognize an iPod" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPod; U; CPU iPhone OS 4_0 like Mac OS X; de-de) AppleWebKit/532.9 (KHTML, like Gecko)').email_version.should == 'iPod'
+      end
+
+      it "should recognize an iPhone" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0_1 like Mac OS X; de-de) AppleWebKit/532.9 (KHTML, like Gecko)').email_version.should == 'iPhone'
+      end
+
+      it "should not mistake Mobile Safari for Apple Mail" do
+        # TODO
+      end
+    end
+
+    describe "AOL" do
+      it "should recognize the Webmail interface" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.13) Gecko/20101203 AskTbFXTV5/3.9.1.14019 Firefox/3.6.13', 'http://mail.aol.com/33222-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.28305313&seq=0&searchIn=none&searchQuery=&start=0&sort=received').email_version.should == 'AOL Webmail'
+      end
+    end
+  end
+
   describe "for operating system details" do
     it "should report the os family" do
       UseragentParser::UserAgent.new({ 'os' => { 'family' => 'Windows NT', 'major' => '3', 'minor' => '1' } }).os_family.should == 'Windows NT'

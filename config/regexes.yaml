@@ -79,8 +79,31 @@ user_agent_parsers:
 
   # Lightning (for Thunderbird)
   # http://www.mozilla.org/projects/calendar/lightning/
+  - regex: 'Lightning/\d+\.\d+[ab]?\d+[a-z]* (Thunderbird)/(\d+)\.(\d+)\.?(\d+)?'
+
   - regex: '(Lightning)/(\d+)\.(\d+)([ab]?\d+[a-z]*)'
 
+  # Eudora
+  - regex: '(Eudora)/(\d+)\.(\d+)\.?(\d+)?'
+
+  - regex: '(EUDORA)'
+    family_replacement: 'Eudora'
+
+  # T-Online E-Mail
+  - regex: '(T-Online eMail) (\d+)\.(\d+)?'
+
+  # Apple Mail
+  - regex: '(Mail)/\d+.*Darwin/10\.5'
+    family_replacement: 'Apple Mail'
+    v1_replacement: '3'
+
+  # Sparrow
+  - regex: '(Sparrow)/\d+'
+    family_replacement: 'Sparrow'
+
+  # Lotus Notes
+  - regex: '(Lotus-Notes)/(\d+)\.(\d+)'
+    family_replacement: 'Lotus Notes'
   # Swiftfox
   - regex: '(Firefox)/(\d+)\.(\d+)\.(\d+(?:pre)?) \(Swiftfox\)'
     family_replacement: 'Swiftfox'
@@ -153,20 +176,28 @@ user_agent_parsers:
   - regex: '(Twitterbot)/(\d+)\.(\d+)'
     family_replacement: 'TwitterBot'
 
+  # Windows Live Mail / Outlook Express
+  - regex: '(Outlook-Express)/(\d+)\.(\d+)'
+    family_replacement: 'Windows Live Mail'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
 
   # Browser/major_version.minor_version.beta_version
-  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|ThunderBrowse|Iris|UP\.Browser|Bunjaloo|Google Earth|Raven for Mac)/(\d+)\.(\d+)\.(\d+)'
+  - regex: '(AdobeAIR|Chromium|FireWeb|Jasmine|ANTGalio|Midori|Fresco|Lobo|PaleMoon|Maxthon|Lynx|OmniWeb|Dillo|Camino|Demeter|Fluid|Fennec|Shiira|Sunrise|Chrome|Flock|Netscape|Lunascape|WebPilot|Vodafone|NetFront|Netfront|Konqueror|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|Opera Mini|iCab|NetNewsWire|Thunderbird|ThunderBrowse|Iris|UP\.Browser|Bunjaloo|Google Earth|Raven for Mac)/(\d+)\.(\d+)\.(\d+)'
 
   # Browser/major_version.minor_version
-  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser)/(\d+)\.(\d+)'
+  - regex: '(Bolt|Jasmine|IceCat|Skyfire|Midori|Maxthon|Lynx|Arora|IBrowse|Dillo|Camino|Shiira|Fennec|Phoenix|Chrome|Flock|Netscape|Lunascape|Epiphany|WebPilot|Opera Mini|Opera|Vodafone|NetFront|Netfront|Konqueror|Googlebot|SeaMonkey|Kazehakase|Vienna|Iceape|Iceweasel|IceWeasel|Iron|K-Meleon|Sleipnir|Galeon|GranParadiso|iCab|NetNewsWire|Space Bison|Stainless|Orca|Dolfin|BOLT|Minimo|Tizen Browser|Polaris|Abrowser|Thunderbird)/(\d+)\.(\d+)'
 
   # Browser major_version.minor_version.beta_version (space instead of slash)
   - regex: '(iRider|Crazy Browser|SkipStone|iCab|Lunascape|Sleipnir|Maemo Browser) (\d+)\.(\d+)\.(\d+)'
   # Browser major_version.minor_version (space instead of slash)
   - regex: '(iCab|Lunascape|Opera|Android|Jasmine|Polaris|BREW) (\d+)\.(\d+)\.?(\d+)?'
+
+  # Microsoft Outlook 2007/2010
+  - regex: '(MSOffice) (\d+)'
+    family_replacement: 'Outlook'
 
   # weird android UAs
   - regex: '(Android) Donut'
@@ -318,6 +349,10 @@ user_agent_parsers:
     family_replacement: 'IE'
 
   - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
+
+  # Generic AppleWebKit detection
+  - regex: '(AppleWebKit)/(\d+)\.?(\d+)?.*\(KHTML, like Gecko\)'
+    family_replacement: 'Apple WebKit'
 
 os_parsers:
 
@@ -827,3 +862,38 @@ mobile_os_families:
   - 'Windows Phone 6.5'
   - 'Windows CE'
   - 'Symbian OS'
+
+referrer_parsers:
+  - regex: '(mail\.live\.com)'
+    referrer_replacement: 'Hotmail'
+
+  - regex: '(mail\.yahoo\.com)'
+    referrer_replacement: 'Yahoo! Mail'
+
+  - regex: '(email\.freenet\.de)'
+    referrer_replacement: 'WEB.DE'
+
+  - regex: '(mail\.aol\.com)'
+    referrer_replacement: 'AOL Webmail'
+
+  - regex: '(mail\.google\.com)'
+    referrer_replacement: 'Gmail'
+
+  - regex: '(win\.mail\.ru)'
+    referrer_replacement: 'mail.ru'
+
+  - regex: '(service\.gmx\.net)'
+    referrer_replacement: 'GMX'
+
+  - regex: '(www\.gmxattachments\.net)'
+    referrer_replacement: 'GMX'
+
+  - regex: '(proxy[^\.]+\.bluewin\.ch)'
+    referrer_replacement: 'Swisscom'
+
+  - regex: '(communicator\.strato\.de)'
+    referrer_replacement: 'Strato'
+
+  - regex: '.+'
+    referrer_replacement: 'Other'
+

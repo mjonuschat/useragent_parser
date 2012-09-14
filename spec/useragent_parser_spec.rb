@@ -6,7 +6,7 @@ describe UseragentParser do
   let(:user_agent_string) { 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; fr; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5,gzip(gfe),gzip(gfe)' }
 
   describe "should return user agent information" do
-    subject { UseragentParser.parse_all(user_agent_string)['user_agent'] }
+    subject { UseragentParser.parse_browser(user_agent_string)['user_agent'] }
 
     its(['family']) { should == 'Firefox' }
     its(['major']) { should == '3' }
@@ -15,7 +15,7 @@ describe UseragentParser do
   end
 
   describe "should return the operating system information" do
-    subject { UseragentParser.parse_all(user_agent_string)['os'] }
+    subject { UseragentParser.parse_browser(user_agent_string)['os'] }
 
     its(['family']) { should == 'Mac OS X' }
     its(['major']) { should == '10' }
@@ -25,7 +25,7 @@ describe UseragentParser do
   end
 
   describe "should return the device information" do
-    subject { UseragentParser.parse_all(user_agent_string)['device'] }
+    subject { UseragentParser.parse_browser(user_agent_string)['device'] }
 
     its(['family']) { should be_nil }
     its(['is_spider']) { should be_false }
