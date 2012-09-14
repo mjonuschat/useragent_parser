@@ -1,0 +1,40 @@
+test_cases:
+
+  - referrer_string: 'http://bl131w.blu131.mail.live.com/mail/InboxLight.aspx?n=1166653403'
+    family: 'Hotmail'
+
+  - referrer_string: 'http://de.mc250.mail.yahoo.com/mc/welcome?.gx=1&.tm=1290672405&.rand=4rtrlgfb1p8na'
+    family: 'Yahoo! Mail'
+
+  - referrer_string: 'http://email.freenet.de/Email/View/Body?msg=4681&folder=INBOX&showImages=0&showImages=1&updateShowImagesStatus=1'
+    family: 'WEB.DE'
+
+  - referrer_string: 'http://webmail.aol.com/42951/aol/en-us/Suite.aspx'
+    family: 'AOL Webmail'
+
+  - referrer_string: 'http://mail.aol.com/32945-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.27991476&seq=1&searchIn=none&searchQuery=&start=0&sort=received'
+    family: 'AOL Webmail'
+
+  - referrer_string: 'http://mail.google.com/mail/?ui=2&view=bsp&ver=ohhl4rw8mbn4'
+    family: 'Gmail'
+
+  - referrer_string: 'http://service.gmx.net/de/cgi/g.fcgi/mail/print?folder=inbox&uid=NDI5OMAkFGxkb%2FUN4WZuvoB2anv6Llsc&CUSTOMERNO=8421009&t=de730856557.1294240410.14bd9d8'
+    family: 'GMX'
+
+  - referrer_string: 'http://www.gmxattachments.net/de/cgi/g.fcgi/mail/print/fullhtml?mid=babgebac.1290790887.16270.a7fshhjuag.74&uid=ZGllQYdlCG9ydask92VvuYdkdFl2iYWj&partUid=ZGllQYdlCG9ydask92VvuYdkdFl2iYWj'
+    family: 'GMX'
+
+  - referrer_string: 'http://proxy-mssazhh.bluewin.ch/mail/MessageRead?sid='
+    family: 'Swisscom'
+
+  - referrer_string: 'http://communicator.strato.de/messages/mail_preview.html?msgNo=964'
+    family: 'Strato'
+
+  - referrer_string: 'http://win.mail.ru/cgi-bin/msglist'
+    family: 'mail.ru'
+
+  - referrer_string: 'http://www.example.com'
+    family: 'Other'
+
+  - referrer_string: ''
+    family:

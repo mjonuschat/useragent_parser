@@ -2,12 +2,15 @@ require "useragent_parser/version"
 require "useragent_parser/parsers/user_agent_parser"
 require "useragent_parser/parsers/os_parser"
 require "useragent_parser/parsers/device_parser"
+require "useragent_parser/parsers/referrer_parser"
 require "useragent_parser/user_agent"
+require "yaml"
 
 module UseragentParser
   USER_AGENT_PARSERS = []
   OS_PARSERS = []
   DEVICE_PARSERS = []
+  REFERRER_PARSERS = []
   MOBILE_USER_AGENT_FAMILIES = []
   MOBILE_OS_FAMILIES = []
 
@@ -35,12 +38,36 @@ module UseragentParser
       DEVICE_PARSERS.push UseragentParser::DeviceParser.new(regex, device_replacement)
     end
 
+    yaml['referrer_parsers'].each do |parser|
+      regex = parser['regex']
+      referrer_replacement = parser.fetch('referrer_replacement', nil)
+
+      REFERRER_PARSERS.push UseragentParser::ReferrerParser.new(regex, referrer_replacement)
+    end
+
     MOBILE_USER_AGENT_FAMILIES.push *yaml['mobile_user_agent_families']
     MOBILE_OS_FAMILIES.push *yaml['mobile_os_families']
   end
 
-  def self.parse_all(user_agent_string, *js_args)
-    # UseragentParser::UserAgent.new{
+  def self.parse(user_agent_string, *js_args)
+    UseragentParser::UserAgent.new(self.parse_browser(user_agent_string, *js_args))
+  end
+
+  def self.parse_with_referrer(user_agent_string, referrer = nil, *js_args)
+    UseragentParser::UserAgent.new(self.parse_email(user_agent_string, referrer, *js_args))
+  end
+
+  def self.parse_email(user_agent_string, referrer = nil, *js_args)
+    {
+      'user_agent'  => self.parse_user_agent(user_agent_string, *js_args),
+      'os'          => self.parse_os(user_agent_string, *js_args),
+      'device'      => self.parse_device(user_agent_string, *js_args),
+      'string'      => user_agent_string,
+      'referrer'    => self.parse_referrer(referrer)
+    }
+  end
+
+  def self.parse_browser(user_agent_string, *js_args)
     {
       'user_agent'  => self.parse_user_agent(user_agent_string, *js_args),
       'os'          => self.parse_os(user_agent_string, *js_args),
@@ -107,6 +134,16 @@ module UseragentParser
     end
 
     { 'family' => device, 'is_mobile' => is_mobile, 'is_spider' => (device == 'Spider') }
+  end
+
+  def self.parse_referrer(referrer_string)
+    referrer = nil
+    REFERRER_PARSERS.each do |parser|
+      referrer = parser.parse(referrer_string)
+      break unless referrer.nil?
+    end
+
+    { 'family' => referrer }
   end
 end
 
