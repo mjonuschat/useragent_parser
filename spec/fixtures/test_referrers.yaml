@@ -6,7 +6,13 @@ test_cases:
   - referrer_string: 'http://de.mc250.mail.yahoo.com/mc/welcome?.gx=1&.tm=1290672405&.rand=4rtrlgfb1p8na'
     family: 'Yahoo! Mail'
 
+  - referrer_string: 'http://36ohk6dgmcd1n-c.c.yom.mail.yahoo.net/om/api/1.0/openmail.app.invoke'
+    family: 'Yahoo! Mail'
+
   - referrer_string: 'http://email.freenet.de/Email/View/Body?msg=4681&folder=INBOX&showImages=0&showImages=1&updateShowImagesStatus=1'
+    family: 'WEB.DE'
+
+  - referrer_string: 'http://webmail.freenet.de/Email/View/Body?callType=html&account='
     family: 'WEB.DE'
 
   - referrer_string: 'http://webmail.aol.com/42951/aol/en-us/Suite.aspx'

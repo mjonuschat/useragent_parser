@@ -150,9 +150,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "AOL/8.0 (Lindows 2003)"
-      family: "Other"
-      major:
-      minor:
+      family: "AOL"
+      major: '8'
+      minor: '0'
       patch:
     - user_agent_string: "aolbrowser/1.1 InterCon-Web-Library/1.2"
       family: "Other"
@@ -9190,9 +9190,9 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20020730 AOL/7.0"
-      family: "Other"
-      major:
-      minor:
+      family: "AOL"
+      major: '7'
+      minor: '0'
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.1) Gecko/20020909"
       family: "Other"
@@ -13920,14 +13920,14 @@ test_cases:
       minor:
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-GB; rv:1.0.2) Gecko/20020924 AOL/7.0"
-      family: "Other"
-      major:
-      minor:
+      family: "AOL"
+      major: "7"
+      minor: "0"
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US; rv:1.0.2) Gecko/20020924 AOL/7.0"
-      family: "Other"
-      major:
-      minor:
+      family: "AOL"
+      major: "7"
+      minor: "0"
       patch:
     - user_agent_string: "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.0.1) Gecko/20030306 Camino/0.7"
       family: "Camino"

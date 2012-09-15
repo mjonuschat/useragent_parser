@@ -150,6 +150,9 @@ user_agent_parsers:
   - regex: '(chromeframe)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Frame'
 
+  # AOL must come before MSIE.
+  - regex: '(AOL)/(\d+)\.(\d+)'
+
   # UC Browser
   - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
 
@@ -870,7 +873,13 @@ referrer_parsers:
   - regex: '(mail\.yahoo\.com)'
     referrer_replacement: 'Yahoo! Mail'
 
+  - regex: '(mail\.yahoo\.net)'
+    referrer_replacement: 'Yahoo! Mail'
+
   - regex: '(email\.freenet\.de)'
+    referrer_replacement: 'WEB.DE'
+
+  - regex: '(webmail\.freenet\.de)'
     referrer_replacement: 'WEB.DE'
 
   - regex: '(mail\.aol\.com)'
@@ -893,6 +902,9 @@ referrer_parsers:
 
   - regex: '(communicator\.strato\.de)'
     referrer_replacement: 'Strato'
+
+  - regex: '(www\.arcor-usercontent\.de)'
+    referrer_replacement: 'Arcor'
 
   - regex: '.+'
     referrer_replacement: 'Other'
