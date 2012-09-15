@@ -183,6 +183,10 @@ user_agent_parsers:
   - regex: '(Outlook-Express)/(\d+)\.(\d+)'
     family_replacement: 'Windows Live Mail'
 
+  # Android Mobile Safari
+  - regex: '(Version)\/(\d+)\.(\d+) Mobile Safari\/\d+'
+    family_replacement: 'Mobile Safari'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
