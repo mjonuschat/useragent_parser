@@ -155,6 +155,7 @@ module UseragentParser
       case @browser_major_version
       when '12' then 'Outlook 2007'
       when '14' then 'Outlook 2010'
+      when '15' then 'Outlook 2013'
       else 'Outlook'
       end
     end

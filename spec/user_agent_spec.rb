@@ -111,6 +111,10 @@ describe UseragentParser::UserAgent do
       it "should should recognize Outlook 2010" do
         UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; InfoPath.3; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E; ms-office; MSOffice 14)').email_version.should == 'Outlook 2010'
       end
+
+      it "should should recognize Outlook 2013" do
+        UseragentParser.parse_with_referrer('Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; Tablet PC 2.0; InfoPath.3; BOIE9;ENIN; Microsoft Outlook 15.0.4128; ms-office; MSOffice 15)').email_version.should == 'Outlook 2013'
+      end
     end
 
     describe "Apple Mail" do
