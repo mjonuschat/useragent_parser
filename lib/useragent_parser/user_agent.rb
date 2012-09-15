@@ -163,7 +163,16 @@ module UseragentParser
     end
 
     def ios_mail_names
-      @device
+      prefix = "Apple Mobile Mail"
+      case @os_major_version
+      when '1' then "#{prefix} 1"
+      when '2' then "#{prefix} 2"
+      when '3' then "#{prefix} 3"
+      when '4' then "#{prefix} 4"
+      when '5' then "#{prefix} 5"
+      when '6' then "#{prefix} 6"
+      else "#{prefix}"
+      end
     end
 
     def outlook_names
