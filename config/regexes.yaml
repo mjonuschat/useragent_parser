@@ -876,6 +876,9 @@ referrer_parsers:
   - regex: '(mail\.yahoo\.net)'
     referrer_replacement: 'Yahoo! Mail'
 
+  - regex: '(mm\.web\.de)'
+    referrer_replacement: 'WEB.DE'
+
   - regex: '(email\.freenet\.de)'
     referrer_replacement: 'WEB.DE'
 
