@@ -150,6 +150,9 @@ user_agent_parsers:
   - regex: '(chromeframe)/(\d+)\.(\d+)\.(\d+)'
     family_replacement: 'Chrome Frame'
 
+  # AOL must come before MSIE.
+  - regex: '(AOL)/(\d+)\.(\d+)'
+
   # UC Browser
   - regex: '(UC Browser)(\d+)\.(\d+)\.(\d+)'
 
