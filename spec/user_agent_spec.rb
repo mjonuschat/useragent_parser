@@ -163,7 +163,7 @@ describe UseragentParser::UserAgent do
 
     describe "AOL" do
       it "should recognize the Webmail interface" do
-        UseragentParser.parse_with_referrer('Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.13) Gecko/20101203 AskTbFXTV5/3.9.1.14019 Firefox/3.6.13', 'http://mail.aol.com/33222-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.28305313&seq=0&searchIn=none&searchQuery=&start=0&sort=received').email_version.should == 'AOL Webmail'
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.13) Gecko/20101203 AskTbFXTV5/3.9.1.14019 Firefox/3.6.13', 'http://mail.aol.com/33222-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.28305313&seq=0&searchIn=none&searchQuery=&start=0&sort=received').email.should == 'AOL Webmail'
       end
     end
   end

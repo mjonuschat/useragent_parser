@@ -30,8 +30,8 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10 ThunderBrowse/3.3.5'
     family: 'Windows 7'
-    major:
-    minor:
+    major: '6'
+    minor: '1'
     patch:
     patch_minor:
 
@@ -93,8 +93,8 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) FireWeb/1.0.0.0'
     family: 'Windows 7'
-    major:
-    minor:
+    major: '6'
+    minor: '1'
     patch:
     patch_minor:
 
@@ -227,8 +227,8 @@ test_cases:
 
   - user_agent_string: 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.3a1) Gecko/20100208 MozillaDeveloperPreview/3.7a1 (.NET CLR 3.5.30729)'
     family: 'Windows 7'
-    major:
-    minor:
+    major: '6'
+    minor: '1'
     patch:
     patch_minor:
 
@@ -315,8 +315,8 @@ test_cases:
   - user_agent_string: 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; chromeframe; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)'
     js_ua: "{'js_user_agent_string': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/530.1 (KHTML, like Gecko) Chrome/2.0.169.1 Safari/530.1'}"
     family: 'Windows Vista'
-    major:
-    minor:
+    major: '6'
+    minor: '0'
     patch:
     patch_minor:
 
