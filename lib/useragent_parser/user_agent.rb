@@ -46,12 +46,28 @@ module UseragentParser
       @browser_version ||= "#{browser_major_version}.#{browser_minor_version}.#{browser_patch_version}".gsub(/\.+$/, '').strip
     end
 
-    def os_version
-      @os_version ||= "#{os_major_version}.#{os_minor_version}.#{os_patch_version}".gsub(/\.+$/, '').strip
+    def os_version(options = {})
+      return @os_family if os_platform == 'Windows'
+      if options.fetch(:minor_only, false)
+        @os_release ||= os_release
+      else
+        @os_version ||= "#{os_major_version}.#{os_minor_version}.#{os_patch_version}".gsub(/\.+$/, '').strip
+      end
     end
 
     def os
       @os ||= os_name
+    end
+
+    def os_family
+      @os_platform ||= os_platform
+    end
+
+    def os_family_aggregated
+      case os_family
+      when 'Windows', 'Windows NT' then 'Windows'
+      else os_family
+      end
     end
 
     def browser
@@ -131,7 +147,7 @@ module UseragentParser
       return ios_mail_names if is_ios_mail?
       return outlook_names if is_outlook?
       return 'AOL Desktop' if @browser_family == 'AOL'
-      email_name
+      nil
     end
 
     def apple_mail_names
@@ -147,7 +163,16 @@ module UseragentParser
     end
 
     def ios_mail_names
-      @device
+      prefix = "Apple Mobile Mail"
+      case @os_major_version
+      when '1' then "#{prefix} 1"
+      when '2' then "#{prefix} 2"
+      when '3' then "#{prefix} 3"
+      when '4' then "#{prefix} 4"
+      when '5' then "#{prefix} 5"
+      when '6' then "#{prefix} 6"
+      else "#{prefix}"
+      end
     end
 
     def outlook_names
@@ -165,6 +190,15 @@ module UseragentParser
     end
 
     def os_name
+      case os_platform
+      when 'Windows' then os_names_win_prefixed
+      when 'Windows NT' then os_names_winnt_prefixed
+      when 'Mac OS X' then os_names_osx_prefixed
+      else "#{os_family} #{os_version}".strip
+      end
+    end
+
+    def os_name_unprefixed
       case os_family
       when 'Windows' then os_names_win
       when 'Windows NT' then os_names_winnt
@@ -173,42 +207,63 @@ module UseragentParser
       end
     end
 
+    def os_platform
+      case @os_family
+      when 'Windows 98', 'Windows XP', 'Windows ME', 'Windows 95', 'Windows NT 4.0', 'Windows Vista', 'Windows 2000', 'Windows 7', 'Windows 8' then 'Windows'
+      else @os_family
+      end
+    end
+
     def os_release
       @release ||= "#{os_major_version}.#{os_minor_version}".gsub(/\.$/, '')
     end
 
+    def os_names_win_prefixed
+      "Microsoft #{@os_family} #{os_release}"
+    end
+
     def os_names_win
-      "Microsoft Windows #{os_version}"
+      require 'pp'
+      pp self
+      pp 'HERE!'
+
+      os_version
+    end
+
+    def os_names_winnt_prefixed
+      "Microsoft Windows #{os_names_winnt}"
     end
 
     def os_names_winnt
-      prefix = "Microsoft Windows"
       case os_release
-      when "3.1" then "#{prefix} NT 3.1"
-      when "3.5" then "#{prefix} NT 3.5"
-      when "4.0" then "#{prefix} NT 4.0"
-      when "5.0" then "#{prefix} 2000"
-      when "5.1" then "#{prefix} XP"
-      when "5.2" then "#{prefix} XP 64bit / Server 2003"
-      when "6.0" then "#{prefix} Vista / Server 2008"
-      when "6.1" then "#{prefix} 7 / Server 2008 R2"
-      when "6.2" then "#{prefix} 8"
-      else "#{prefix} #{os_version}"
+      when "3.1" then "NT 3.1"
+      when "3.5" then "NT 3.5"
+      when "4.0" then "NT 4.0"
+      when "5.0" then "2000"
+      when "5.1" then "XP"
+      when "5.2" then "XP 64bit / Server 2003"
+      when "6.0" then "Vista / Server 2008"
+      when "6.1" then "7 / Server 2008 R2"
+      when "6.2" then "8"
+      else "NT #{os_release}"
       end
     end
 
+    def os_names_osx_prefixed
+      "Apple Mac OS X #{os_version} (#{os_names_osx})"
+    end
+
     def os_names_osx
-      prefix = "Apple Mac OS X"
       case os_release
-      when "10.0" then "#{prefix} #{os_version} (Cheetah)"
-      when "10.1" then "#{prefix} #{os_version} (Puma)"
-      when "10.2" then "#{prefix} #{os_version} (Jaguar)"
-      when "10.3" then "#{prefix} #{os_version} (Panther)"
-      when "10.4" then "#{prefix} #{os_version} (Tiger)"
-      when "10.5" then "#{prefix} #{os_version} (Leopard)"
-      when "10.6" then "#{prefix} #{os_version} (Snow Leopard)"
-      when "10.7" then "#{prefix} #{os_version} (Lion)"
-      else "#{prefix} #{os_version}"
+      when "10.0" then "Cheetah"
+      when "10.1" then "Puma"
+      when "10.2" then "Jaguar"
+      when "10.3" then "Panther"
+      when "10.4" then "Tiger"
+      when "10.5" then "Leopard"
+      when "10.6" then "Snow Leopard"
+      when "10.7" then "Lion"
+      else "Unknown"
       end
     end
   end

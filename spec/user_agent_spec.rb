@@ -144,26 +144,34 @@ describe UseragentParser::UserAgent do
     end
 
     describe "Apple Mobile Mail" do
-      it "should recognize an iPad" do
-        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPad; U; CPU OS 3_2_2 like Mac OS X; de-de) AppleWebKit/531.21.10 (KHTML, like Gecko)').email_version.should == 'iPad'
+      it "should recognize iOS 2" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPhone; U; CPU iPhone OS 2_1 like Mac OS X; de-de) AppleWebKit/525.18.1 (KHTML, like Gecko)').email_version.should == 'Apple Mobile Mail 2'
       end
 
-      it "should recognize an iPod" do
-        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPod; U; CPU iPhone OS 4_0 like Mac OS X; de-de) AppleWebKit/532.9 (KHTML, like Gecko)').email_version.should == 'iPod'
+      it "should recognize iOS 3" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_3 like Mac OS X; de-de) AppleWebKit/528.18 (KHTML, like Gecko)').email_version.should == 'Apple Mobile Mail 3'
       end
 
-      it "should recognize an iPhone" do
-        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0_1 like Mac OS X; de-de) AppleWebKit/532.9 (KHTML, like Gecko)').email_version.should == 'iPhone'
+      it "should recognize iOS 4" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; de-de) AppleWebKit/533.17.9 (KHTML, like Gecko)').email_version.should == 'Apple Mobile Mail 4'
+      end
+
+      it "should recognize iOS 5" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPad; CPU OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko)').email_version.should == 'Apple Mobile Mail 5'
+      end
+
+      it "should recognize iOS 2" do
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/535.8 (KHTML, like Gecko)').email_version.should == 'Apple Mobile Mail 6'
       end
 
       it "should not mistake Mobile Safari for Apple Mail" do
-        # TODO
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X) AppleWebKit/535.8 (KHTML, like Gecko)', 'http://example.com').email_version.should be_nil
       end
     end
 
     describe "AOL" do
       it "should recognize the Webmail interface" do
-        UseragentParser.parse_with_referrer('Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.13) Gecko/20101203 AskTbFXTV5/3.9.1.14019 Firefox/3.6.13', 'http://mail.aol.com/33222-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.28305313&seq=0&searchIn=none&searchQuery=&start=0&sort=received').email_version.should == 'AOL Webmail'
+        UseragentParser.parse_with_referrer('Mozilla/5.0 (Windows; U; Windows NT 6.1; de; rv:1.9.2.13) Gecko/20101203 AskTbFXTV5/3.9.1.14019 Firefox/3.6.13', 'http://mail.aol.com/33222-111/aol-1/de-de/Lite/MsgRead.aspx?folder=Spam&uid=1.28305313&seq=0&searchIn=none&searchQuery=&start=0&sort=received').email.should == 'AOL Webmail'
       end
     end
   end

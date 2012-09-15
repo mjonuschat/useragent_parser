@@ -183,6 +183,10 @@ user_agent_parsers:
   - regex: '(Outlook-Express)/(\d+)\.(\d+)'
     family_replacement: 'Windows Live Mail'
 
+  # Android Mobile Safari
+  - regex: '(Version)\/(\d+)\.(\d+) Mobile Safari\/\d+'
+    family_replacement: 'Mobile Safari'
+
   #### END SPECIAL CASES TOP ####
 
   #### MAIN CASES - this catches > 50% of all browsers ####
@@ -403,19 +407,19 @@ os_parsers:
   - regex: '(XBLWP7)'
     os_replacement: 'Windows Phone OS'
 
-  - regex: '(Windows NT 6\.1)'
+  - regex: '(Windows NT) (6)\.(1)'
     os_replacement: 'Windows 7'
 
-  - regex: '(Windows NT 6\.0)'
+  - regex: '(Windows NT) (6)\.(0)'
     os_replacement: 'Windows Vista'
 
   - regex: '(Windows 98|Windows XP|Windows ME|Windows 95|Windows CE|Windows 7|Windows NT 4\.0|Windows Vista|Windows 2000)'
 
   # is this a spoof or is nt 6.2 out and about in some capacity?
-  - regex: '(Windows NT 6\.2)'
+  - regex: '(Windows NT) (6)\.(2)'
     os_replacement: 'Windows 8'
 
-  - regex: '(Windows NT 5\.0)'
+  - regex: '(Windows NT) (5)\.(0)'
     os_replacement: 'Windows 2000'
 
   - regex: '(Windows Phone OS) (\d+)\.(\d+)'
@@ -423,7 +427,7 @@ os_parsers:
   - regex: '(Windows ?Mobile)'
     os_replacement: 'Windows Mobile'
 
-  - regex: '(WinNT4.0)'
+  - regex: '(WinNT)(4)\.(0)'
     os_replacement: 'Windows NT 4.0'
 
   - regex: '(Win98)'
@@ -875,6 +879,9 @@ referrer_parsers:
 
   - regex: '(mail\.yahoo\.net)'
     referrer_replacement: 'Yahoo! Mail'
+
+  - regex: '(mm\.web\.de)'
+    referrer_replacement: 'WEB.DE'
 
   - regex: '(email\.freenet\.de)'
     referrer_replacement: 'WEB.DE'

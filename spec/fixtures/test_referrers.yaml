@@ -42,5 +42,8 @@ test_cases:
   - referrer_string: 'http://www.example.com'
     family: 'Other'
 
+  - referrer_string: 'https://mm.web.de/msg?6&folderId=1269567206893714944&index=3'
+    family: 'WEB.DE'
+
   - referrer_string: ''
     family:
