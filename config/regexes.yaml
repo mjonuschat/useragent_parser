@@ -355,6 +355,9 @@ user_agent_parsers:
   - regex: '(MSIE) (\d+)\.(\d+)'
     family_replacement: 'IE'
 
+  - regex: '(Trident/7.0). rv:(\d+).(\d+)'
+    family_replacement: 'IE'
+
   - regex: '(Nintendo 3DS).* Version/(\d+)\.(\d+)(?:\.(\w+))'
 
   # Generic AppleWebKit detection

@@ -1,5 +1,11 @@
 test_cases:
 
+  - user_agent_string: 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko'
+    family: 'IE'
+    major: '11'
+    minor: '0'
+    patch:
+
   - user_agent_string: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.8+ (KHTML, like Gecko) Version/6.0 Safari/536.25'
     family: 'WebKit Nightly'
     major: '537'
