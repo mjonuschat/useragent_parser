@@ -10,10 +10,10 @@ describe UseragentParser::UserAgentParser do
         js_ua = [ js_ua['js_user_agent_string'], js_ua['js_user_agent_family'], js_ua['js_user_agent_v1'], js_ua['js_user_agent_v2'], js_ua['js_user_agent_v3'] ]
       end
       result = UseragentParser.parse_user_agent(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['major'].should  == testcase['major']
-      result['minor'].should  == testcase['minor']
-      result['patch'].should  == testcase['patch']
+      expect(result['family']).to eq(testcase['family'])
+      expect(result['major']).to  eq(testcase['major'])
+      expect(result['minor']).to  eq(testcase['minor'])
+      expect(result['patch']).to  eq(testcase['patch'])
     end
   end
 
@@ -24,10 +24,10 @@ describe UseragentParser::UserAgentParser do
         js_ua = [ js_ua['js_user_agent_string'], js_ua['js_user_agent_family'], js_ua['js_user_agent_v1'], js_ua['js_user_agent_v2'], js_ua['js_user_agent_v3'] ]
       end
       result = UseragentParser.parse_user_agent(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['major'].should  == testcase['major']
-      result['minor'].should  == testcase['minor']
-      result['patch'].should  == testcase['patch']
+      expect(result['family']).to eq(testcase['family'])
+      expect(result['major']).to  eq(testcase['major'])
+      expect(result['minor']).to  eq(testcase['minor'])
+      expect(result['patch']).to  eq(testcase['patch'])
     end
   end
 
@@ -38,10 +38,10 @@ describe UseragentParser::UserAgentParser do
         js_ua = eval(testcase['js_ua'].gsub("': '", "' => '")).values
       end
       result = UseragentParser.parse_user_agent(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['major'].should  == testcase['major']
-      result['minor'].should  == testcase['minor']
-      result['patch'].should  == testcase['patch']
+      expect(result['family']).to eq(testcase['family'])
+      expect(result['major']).to  eq(testcase['major'])
+      expect(result['minor']).to  eq(testcase['minor'])
+      expect(result['patch']).to  eq(testcase['patch'])
     end
   end
 
@@ -52,10 +52,10 @@ describe UseragentParser::UserAgentParser do
         js_ua = eval(testcase['js_ua'].gsub("': '", "' => '")).values
       end
       result = UseragentParser.parse_user_agent(testcase['user_agent_string'], *js_ua)
-      result['family'].should == testcase['family']
-      result['major'].should  == testcase['major']
-      result['minor'].should  == testcase['minor']
-      result['patch'].should  == testcase['patch']
+      expect(result['family']).to eq(testcase['family'])
+      expect(result['major']).to  eq(testcase['major'])
+      expect(result['minor']).to  eq(testcase['minor'])
+      expect(result['patch']).to  eq(testcase['patch'])
     end
   end
 end
